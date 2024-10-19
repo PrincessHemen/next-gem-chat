@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "@reduxjs/toolkit": "^2.3.0",
     "chalk": "^5.3.0",
+    "firebase": "^10.14.1",
     "ioredis": "^5.4.1",
     "next": "14.2.15",
     "prompt-sync": "^4.2.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "^9.1.2",
+    "simple-parallax-js": "^6.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
