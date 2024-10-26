@@ -1,8 +1,9 @@
-"use client" 
+"use client";
 
 import { useState, useRef, useEffect } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Link from 'next/link'; // Import Link for navigation
+import { useAppSelector } from '../redux/store'; // Import your custom hook to access Redux state
 
 const Chatbot = () => {
   const [chatHistory, setChatHistory] = useState([
@@ -12,8 +13,12 @@ const Chatbot = () => {
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Get the current user's ID from the Redux store
+  const user = useAppSelector(state => state.auth.user); // Adjust based on your Redux structure
+  const userId = user ? user.uid : null; // Get user ID if user is logged in
+
   const sendMessage = async () => {
-    if (userInput.trim() === '') return;
+    if (userInput.trim() === '' || !userId) return; // Ensure user is logged in
 
     try {
       const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY as string);

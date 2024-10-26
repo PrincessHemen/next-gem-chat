@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 const HomePage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user); // Retrieve user from Redux
   const parallaxRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
@@ -37,7 +37,7 @@ const HomePage = () => {
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(login(user));
+        dispatch(login(user)); // Store the user in Redux
       } else {
         dispatch(logout());
       }
@@ -78,10 +78,10 @@ const HomePage = () => {
 
       <div className="relative z-10 max-w-md w-full text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-4">Welcome to Our AI Chatbot</h1>
-        <p className="mb-6">Click the button below to start chatting!</p>
 
         {user ? (
           <>
+            <p className="mb-4">Welcome, {user.displayName}!</p> {/* Display the user's name */}
             <Link href="/chat">
               <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-200">
                 Go to Chat
