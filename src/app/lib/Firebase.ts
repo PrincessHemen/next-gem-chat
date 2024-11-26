@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } from 'firebase/auth';
 
 // Your web app's Firebase configuration
