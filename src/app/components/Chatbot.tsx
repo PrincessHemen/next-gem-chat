@@ -3,9 +3,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai'; // Ensure this is correctly imported
-import { LeakyBucket } from '../lib/leakyBucket'; // Import your LeakyBucket class
-import { useAppSelector } from '../redux/store'; // Import your custom hook to access Redux state
+import { GoogleGenerativeAI } from '@google/generative-ai'; 
+import { LeakyBucket } from '../lib/leakyBucket'; // LeakyBucket class
+import { useAppSelector } from '../redux/store'; // Custom hook to access Redux state
 
 // Initialize the Leaky Bucket instance with 10 requests per minute
 const rateLimitPerMinute = 10;
@@ -48,14 +48,19 @@ const Chatbot = () => {
 
             // Reset user input
             setUserInput('');
-        } catch (error: any) {
-            // Check for network-related errors
-            if (error.message.includes('NetworkError')) {
-                alert("Network connection is unstable. Please check your internet connection.");
+        } catch (error) {
+            if (error instanceof Error) {
+                // Check for network-related errors
+                if (error.message.includes('NetworkError')) {
+                    alert("Network connection is unstable. Please check your internet connection.");
+                } else {
+                    alert("An error occurred while generating the response. Please try again later.");
+                }
+                console.error("Error with generating response:", error);
             } else {
-                alert("An error occurred while generating the response. Please try again later.");
+                // Handle cases where the error is not an instance of Error
+                console.error("Unknown error type:", error);
             }
-            console.error("Error with generating response:", error);
         }
     };
 
